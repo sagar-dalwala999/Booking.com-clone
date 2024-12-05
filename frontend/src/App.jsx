@@ -9,9 +9,11 @@ import FlightsHotels from "./pages/flights-hotels/FlightsHotels";
 import CarRentals from "./pages/car-rentals/CarRentals";
 import Attractions from "./pages/attractions/Attractions";
 import AirportTaxis from "./pages/airport-taxis/AirportTaxis";
-import StaysFilterPage from "./pages/filter-pages/StaysFilterPage";
-import StaysDetails from "./pages/details-pages/StaysDetails";
-import StaysBlog from "./pages/blog-pages/StaysBlog";
+
+
+import StaysBlog from "./pages/stays/blog-pages/StaysBlog";
+import StaysFilterPage from "./pages/stays/filter-pages/StaysFilterPage";
+import StaysDetails from "./pages/stays/details-pages/StaysDetails";
 
 function App() {
   return (

@@ -1,0 +1,64 @@
+/* eslint-disable react/prop-types */
+const PropertyImages = ({ openModal }) => {
+  const data = {
+    images: [
+      "https://via.placeholder.com/800x400",
+      "https://via.placeholder.com/800x400",
+      "https://via.placeholder.com/800x400",
+      "https://via.placeholder.com/800x400",
+      "https://via.placeholder.com/800x400",
+    ],
+    featuredImage: "https://via.placeholder.com/800x400",
+  };
+
+  return (
+    <div className="max-w-screen-lg mx-auto p-4">
+      {/* Image Gallery */}
+      <div className="grid grid-cols-3 gap-2">
+        {/* Featured Image */}
+        <div className="col-span-3 lg:col-span-2">
+          <img
+            src={data.featuredImage || "https://via.placeholder.com/800x400"}
+            alt="Featured"
+            className="w-full h-80 object-cover rounded-lg cursor-pointer"
+            onClick={() => openModal(data.featuredImage)}
+          />
+        </div>
+
+        {/* Smaller Images */}
+        <div className="grid grid-cols-2 gap-2 lg:col-span-1">
+          {data.images.slice(0, 4).map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Gallery ${index}`}
+              className="w-full h-40 object-cover rounded-lg cursor-pointer"
+              onClick={() => openModal(image)}
+            />
+          ))}
+
+          {/* "More Photos" Badge */}
+          {data.images.length > 4 && (
+            <div
+              className="relative w-full h-40 rounded-lg overflow-hidden cursor-pointer bg-gray-200"
+              onClick={() => openModal(data.images[4])}
+            >
+              <img
+                src={data.images[4]}
+                alt="More Photos"
+                className="absolute inset-0 w-full h-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <span className="text-white text-lg font-semibold">
+                  +{data.images.length - 4} Photos
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PropertyImages;

@@ -1,9 +1,8 @@
-import {  Checkbox } from "@material-tailwind/react";
+import { Checkbox } from "@material-tailwind/react";
 import { useState } from "react";
-// import FilterByMobileView from "./FilterByMobileView";
 
-// eslint-disable-next-line react/prop-types
-const FilterBy = ({ isDrawerOpen, setIsDrawerOpen }) => {
+
+const FilterBy = () => {
   // Min and max price constants
   const minPrice = 2000;
   const maxPrice = 40000;
@@ -66,10 +65,10 @@ const FilterBy = ({ isDrawerOpen, setIsDrawerOpen }) => {
 
   return (
     <>
-      {/* <div className="max-w-screen-xl mx-auto px-4"> */}
       <div className="flex flex-col lg:flex-row">
-        {/* Left Sidebar for Filters */}
-        <aside className="w-full lg:w-[300px] bg-white rounded-lg border shadow-md p-4 space-y-6 my-6 hidden lg:block">
+        <aside
+          className={`w-full lg:w-[300px] bg-white rounded-lg border shadow-md p-4 space-y-6 my-6`}
+        >
           <h2 className="font-bold text-lg mb-4">Filter by:</h2>
 
           {/* Price Range */}
@@ -118,13 +117,7 @@ const FilterBy = ({ isDrawerOpen, setIsDrawerOpen }) => {
             </div>
           ))}
         </aside>
-
-        {/* Main Content */}
       </div>
-      {/* </div> */}
-
-      {/* Drawer for Mobile/Tablet */}
-      {/* <FilterByMobileView isDrawerOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} /> */}
     </>
   );
 };

@@ -8,9 +8,12 @@ const FilterByMobileView = ({ isDrawerOpen, onClose }) => {
       open={isDrawerOpen}
       onClose={() => onClose(false)}
       placement="bottom"
-      className="p-4 w-full h-auto"
+      className="overflow-y-auto"
+      size={600}
     >
-      <FilterBy />
+      <div className="p-4">
+        <FilterBy isDrawerOpen={isDrawerOpen} />
+      </div>
     </Drawer>
   );
 };
