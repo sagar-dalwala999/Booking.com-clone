@@ -1,13 +1,11 @@
-import { Checkbox } from "@material-tailwind/react";
 import { useState } from "react";
-
+import PriceRange from "./PriceRange";
+import FilterByOptions from "../../components/filter/FilterByOptions";
 
 const FilterBy = () => {
   // Min and max price constants
   const minPrice = 2000;
   const maxPrice = 40000;
-
-  const [showMoreFilters, setShowMoreFilters] = useState({});
 
   const [minSliderValue, setMinSliderValue] = useState(0); // Slider value for min price
 
@@ -17,14 +15,6 @@ const FilterBy = () => {
   };
 
   const minPriceValue = calculatePrice(minSliderValue);
-
-  // Toggle "Show More" for a filter category
-  const toggleShowMore = (category) => {
-    setShowMoreFilters((prev) => ({
-      ...prev,
-      [category]: !prev[category],
-    }));
-  };
 
   // Filter categories
   const filterCategories = {
@@ -72,50 +62,13 @@ const FilterBy = () => {
           <h2 className="font-bold text-lg mb-4">Filter by:</h2>
 
           {/* Price Range */}
-          <div>
-            <h3 className="font-semibold mb-2">Your Budget (per night)</h3>
-            <div className="flex items-center gap-4">
-              <input
-                id="default-range"
-                type="range"
-                name="min-price"
-                min={0}
-                max={100}
-                step={5}
-                value={minSliderValue}
-                onChange={(e) => setMinSliderValue(e.target.value)}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-              />
-            </div>
-            <p className="text-sm text-gray-500 mt-2">
-              ₹{Math.round(minPriceValue)}
-            </p>
-          </div>
+          <PriceRange
+            minSliderValue={minSliderValue}
+            setMinSliderValue={setMinSliderValue}
+            minPriceValue={minPriceValue}
+          />
 
-          {/* Filters */}
-          {Object.entries(filterCategories).map(([category, filters]) => (
-            <div key={category} className="flex flex-col">
-              <h3 className="font-semibold">{category}</h3>
-              {filters
-                .slice(0, showMoreFilters[category] ? filters.length : 4)
-                .map((label) => (
-                  <Checkbox
-                    key={label}
-                    label={label}
-                    color={"blue"}
-                    className="h-5 w-5 "
-                  />
-                ))}
-              {filters.length > 4 && (
-                <button
-                  onClick={() => toggleShowMore(category)}
-                  className="text-blue-500 text-sm mt-2 hover:underline border p-2"
-                >
-                  {showMoreFilters[category] ? "Show Less" : "Show More"}
-                </button>
-              )}
-            </div>
-          ))}
+          <FilterByOptions filterCategories={filterCategories} />
         </aside>
       </div>
     </>

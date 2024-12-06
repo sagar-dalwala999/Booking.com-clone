@@ -16,8 +16,12 @@ const FlightsForm = ({ data }) => {
   const [adults, setAdults] = useState(data?.adults || 1);
   const [children, setChildren] = useState(data?.children || 0);
   const [isRoundTrip, setIsRoundTrip] = useState(data?.isRoundTrip || true);
-  const [flightClass, setFlightClass] = useState(data?.flightClass || "economy");
-  const [destinationFrom, setDestinationFrom] = useState(data?.destinationFrom || "");
+  const [flightClass, setFlightClass] = useState(
+    data?.flightClass || "economy"
+  );
+  const [destinationFrom, setDestinationFrom] = useState(
+    data?.destinationFrom || ""
+  );
   const [destinationTo, setDestinationTo] = useState(data?.destinationTo || "");
   const [isGuestsOpen, setIsGuestsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -53,10 +57,12 @@ const FlightsForm = ({ data }) => {
   return (
     <div className="bg-[#003b94] text-white">
       {/* Header */}
-      <FormHeader
-        title={"Find your next flight"}
-        description={"Search low prices on flights, hotels, and much more..."}
-      />
+      {!data && (
+        <FormHeader
+          title={"Find your next flight"}
+          description={"Search low prices on flights, hotels, and much more..."}
+        />
+      )}
 
       {/* Trip Type & Flight Class */}
       <div className="bg-white px-6 py-2 shadow-lg rounded-t-lg border border-b-2 max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">

@@ -14,6 +14,7 @@ import StaysBlog from "./pages/stays/blog-pages/StaysBlog";
 import StaysFilterPage from "./pages/stays/filter-pages/StaysFilterPage";
 import StaysDetails from "./pages/stays/details-pages/StaysDetails";
 import StaysBooking from "./pages/stays/booking-pages/StaysBooking";
+import FlightsFilterPage from "./pages/flights/filter-pages/FlightsFilterPage";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
             <Route path="/stays-booking/:id" element={<StaysBooking />} />
 
             {/* Flights */}
-            <Route path="/flights-filter/:id" element={<StaysFilterPage />} />
+            <Route path="/flights-filter/:id" element={<FlightsFilterPage />} />
             <Route path="/flights-details/:id" element={<StaysDetails />} />
             <Route path="/flights-booking/:id" element={<StaysBooking />} />
 
