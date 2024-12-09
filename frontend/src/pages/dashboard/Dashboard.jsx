@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
-        <NavBar />
+        <NavBar userType="user" />
         {!isBookingNavigationHidden && <BookingNavigation />}
         {/* Outlet will render the child route content */}
         <Outlet />

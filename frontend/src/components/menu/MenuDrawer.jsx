@@ -1,5 +1,6 @@
 import { Button, Drawer } from "@material-tailwind/react";
 
+// eslint-disable-next-line react/prop-types
 const MenuDrawer = ({ menuDrawerOpen, setMenuDrawerOpen, loggedIn }) => {
   return (
     <Drawer

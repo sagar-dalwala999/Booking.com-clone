@@ -18,7 +18,8 @@ import NotificationDrawer from "../../components/notification/NotificationDrawer
 import ProfileDrawer from "../../components/profile/ProfileDrawer";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+// eslint-disable-next-line react/prop-types
+const NavBar = ({ userType }) => {
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [notificationDropdownOpen, setNotificationDropdownOpen] =
     useState(false);
@@ -27,55 +28,73 @@ const NavBar = () => {
 
   const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false);
   const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
-  const loggedIn = false; // Change to false for testing non-logged-in view
+
+  // Example: Replace these routes as needed
+  const routes = {
+    logo: userType === "admin" ? "/admin" : "/",
+    signup: userType === "admin" ? "/admin/signup" : "/signup",
+    signin: userType === "admin" ? "/admin/signin" : "/signin",
+    notifications: userType === "admin" ? "/admin/notifications" : "/notifications",
+    profile: userType === "admin" ? "/admin/profile" : "/profile",
+  };
+
+  const loggedIn = false; // Change to true/false based on your auth logic
 
   return (
     <div className="flex justify-between items-center bg-[#003b94] text-white p-4 w-full lg:justify-around">
       {/* //* Logo */}
-      <Link to={"/"}>
-        <h1 className="text-2xl font-bold cursor-pointer">Booking.com</h1>
+      <Link to={routes.logo}>
+        <h1 className="text-2xl font-bold cursor-pointer">
+          {userType === "admin" ? "Admin Panel" : "Booking.com"}
+        </h1>
       </Link>
 
       {/* //* Desktop Links */}
       <ul className="hidden lg:flex items-center gap-4">
         {/* Currency */}
-        <li className="cursor-pointer hover:underline">
-          <ActionTooltip content="Select Your Currency" placement="bottom">
-            <Button
-              className="p-2 text-white bg-transparent hover:bg-blue-800"
-              variant="text"
-              onClick={() => setCurrencyModalOpen(true)}
-            >
-              INR
-            </Button>
-          </ActionTooltip>
-        </li>
+        {userType !== "admin" && (
+          <li className="cursor-pointer hover:underline">
+            <ActionTooltip content="Select Your Currency" placement="bottom">
+              <Button
+                className="p-2 text-white bg-transparent hover:bg-blue-800"
+                variant="text"
+                onClick={() => setCurrencyModalOpen(true)}
+              >
+                INR
+              </Button>
+            </ActionTooltip>
+          </li>
+        )}
 
         {/* Language */}
-        <li className="cursor-pointer hover:underline">
-          <ActionTooltip content="Select Your Language" placement="bottom">
-            <Button
-              className="p-2 text-white bg-transparent hover:bg-blue-800"
-              variant="text"
-              onClick={() => setLanguageModalOpen(true)}
-            >
-              EN
-            </Button>
-          </ActionTooltip>
-        </li>
+        {userType !== "admin" && (
+          <li className="cursor-pointer hover:underline">
+            <ActionTooltip content="Select Your Language" placement="bottom">
+              <Button
+                className="p-2 text-white bg-transparent hover:bg-blue-800"
+                variant="text"
+                onClick={() => setLanguageModalOpen(true)}
+              >
+                EN
+              </Button>
+            </ActionTooltip>
+          </li>
+        )}
 
         {/* Customer Support */}
-        <li>
-          <ActionTooltip content="Contact Customer Support" placement="bottom">
-            <Button
-              className="p-2 text-white bg-transparent hover:bg-blue-800"
-              variant="text"
-              size="sm"
-            >
-              <GoQuestion className="w-6 h-6" />
-            </Button>
-          </ActionTooltip>
-        </li>
+        {userType !== "admin" && (
+          <li>
+            <ActionTooltip content="Contact Customer Support" placement="bottom">
+              <Button
+                className="p-2 text-white bg-transparent hover:bg-blue-800"
+                variant="text"
+                size="sm"
+              >
+                <GoQuestion className="w-6 h-6" />
+              </Button>
+            </ActionTooltip>
+          </li>
+        )}
 
         {/* Notifications */}
         {loggedIn && (
@@ -85,9 +104,7 @@ const NavBar = () => {
                 className="p-2 text-white bg-transparent hover:bg-blue-800"
                 variant="text"
                 size="sm"
-                onClick={() => {
-                  setNotificationDropdownOpen(!notificationDropdownOpen);
-                }}
+                onClick={() => setNotificationDropdownOpen(!notificationDropdownOpen)}
               >
                 <MdNotificationsNone className="w-6 h-6" />
               </Button>
@@ -98,13 +115,13 @@ const NavBar = () => {
           </li>
         )}
 
-        {/* Profile */}
+        {/* Profile or Auth Links */}
         {loggedIn ? (
           <UserProfile />
         ) : (
           <>
             <li>
-              <Link to={"/signup"}>
+              <Link to={routes.signup}>
                 <Button
                   className="p-2 text-blue-900 bg-white hover:bg-blue-900 hover:text-white"
                   variant="text"
@@ -114,7 +131,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/signin"}>
+              <Link to={routes.signin}>
                 <Button
                   className="p-2 text-white bg-transparent hover:bg-blue-900"
                   variant="text"
@@ -129,7 +146,7 @@ const NavBar = () => {
       </ul>
 
       {/* //* Mobile Menu Icons */}
-      <div className="fle flex-end lg:hidden gap-2">
+      <div className="flex flex-end lg:hidden gap-2">
         {/* Notifications */}
         <Button
           className="p-2 text-white bg-transparent hover:bg-blue-800"

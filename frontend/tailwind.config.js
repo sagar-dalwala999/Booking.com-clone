@@ -11,6 +11,12 @@ export default withMT({
         bookingBold: ['"BookingBold"', ...fontFamily.sans],
         bookingExtraBold: ['"BookingExtraBold"', ...fontFamily.sans],
       },
+      colors: {
+        primary: "#003b94",
+        secondary: "#1d4ed8",
+        tertiary: "#1d4ed8",
+        quaternary: "#f6f6f6",
+      },
     },
   },
   plugins: [],

@@ -1,30 +1,32 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { GrGroup } from "react-icons/gr";
-import { LuBedSingle } from "react-icons/lu";
-import { LiaCarSideSolid } from "react-icons/lia";
-import { TbWorldSearch } from "react-icons/tb";
+
 import { IoAirplaneOutline, IoCarSportOutline } from "react-icons/io5";
 import { Button } from "@material-tailwind/react";
+import { TbWorldSearch } from "react-icons/tb";
+import { LuBedSingle } from "react-icons/lu";
+import { GrGroup } from "react-icons/gr";
+import { LiaCarSideSolid } from "react-icons/lia";
 
-const BookingNavigation = () => {
+const AdminNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Get the current path
   const [selected, setSelected] = useState("");
 
+  // Define admin navigation items
   const navItems = [
-    { label: "Stays", path: "/stays", icon: <LuBedSingle /> },
-    { label: "Flights", path: "/flights", icon: <IoAirplaneOutline /> },
+    { label: "Stays", path: "/admin/stays", icon: <LuBedSingle /> },
+    { label: "Flights", path: "/admin/flights", icon: <IoAirplaneOutline /> },
     {
       label: "Flights + Hotels",
-      path: "/flights-hotels",
+      path: "/admin/flights-hotels",
       icon: <TbWorldSearch />,
     },
-    { label: "Car Rentals", path: "/car-rentals", icon: <IoCarSportOutline /> },
-    { label: "Attractions", path: "/attractions", icon: <GrGroup /> },
+    { label: "Car Rentals", path: "/admin/car-rentals", icon: <IoCarSportOutline /> },
+    { label: "Attractions", path: "/admin/attractions", icon: <GrGroup /> },
     {
       label: "Airport Taxis",
-      path: "/airport-taxis",
+      path: "/admin/airport-taxis",
       icon: <LiaCarSideSolid />,
     },
   ];
@@ -69,4 +71,4 @@ const BookingNavigation = () => {
   );
 };
 
-export default BookingNavigation;
+export default AdminNavigation;
