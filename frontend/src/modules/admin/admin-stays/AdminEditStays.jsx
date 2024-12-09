@@ -29,7 +29,7 @@ const AdminEditStays = ({ stay, open, onClose, onSave }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} handler={onClose}>
       <DialogHeader>Edit Stay</DialogHeader>
       <DialogBody>
         <form className="space-y-4">
