@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     profilePicture: { type: String }, // URL of the profile picture
     role: { type: String, enum: ["user", "host", "admin"], default: "user" }, // Role of the user
     preferences: {
-      currency: { type: String, default: "USD" },
+      currency: { type: String, default: "INR" },
       language: { type: String, default: "en" }, // Preferred language
       notifications: {
         email: { type: Boolean, default: true }, // Enable email notifications
@@ -28,25 +28,8 @@ const userSchema = new mongoose.Schema(
     savedStays: [{ type: mongoose.Schema.Types.ObjectId, ref: "Stay" }], // Wishlist or saved stays
     bookings: [
       {
-        stay: { type: mongoose.Schema.Types.ObjectId, ref: "Stay" },
-        checkInDate: { type: Date },
-        checkOutDate: { type: Date },
-        guests: {
-          adults: { type: Number, default: 1 },
-          children: { type: Number, default: 0 },
-        },
-        totalPrice: { type: Number },
-        status: {
-          type: String,
-          enum: ["booked", "cancelled", "completed"],
-          default: "booked",
-        },
-        paymentStatus: {
-          type: String,
-          enum: ["pending", "completed", "failed"],
-          default: "pending",
-        },
-        createdAt: { type: Date, default: Date.now },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Booking",
       },
     ],
     history: [

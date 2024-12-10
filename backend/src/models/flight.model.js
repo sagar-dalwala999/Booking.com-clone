@@ -46,9 +46,18 @@ const flightSchema = new mongoose.Schema(
       default: "scheduled",
     },
     baggagePolicy: {
-      personalBag: { type: Number, required: true },  
-      cabinBag: { type: Number, required: true }, // Weight limit for cabin bags in kg
-      checkInBag: { type: Number, required: true }, // Weight limit for check-in bags in kg
+      personalBag: { 
+        weight: { type: Number, required: true },
+        count: { type: Number, required: true }
+       },  
+      cabinBag: { 
+        weight: { type: Number, required: true },
+        count: { type: Number, required: true }
+       }, // Weight limit for cabin bags in kg
+      checkInBag: { 
+        weight: { type: Number, required: true },
+        count: { type: Number, required: true }
+       }, // Weight limit for check-in bags in kg
     },
     amenities: [
       { type: String }, // E.g., WiFi, in-flight entertainment, meals
