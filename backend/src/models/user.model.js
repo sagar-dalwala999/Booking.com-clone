@@ -62,14 +62,8 @@ const userSchema = new mongoose.Schema(
       facebookId: { type: String },
     },
     //! Admin-specific details
-    adminDetails: {
-      businessName: { type: String }, // Business name for admin
-      businessContact: { type: String }, // Admin business contact
-      businessAddress: { type: String }, // Admin business address
-      verificationStatus: { type: Boolean, default: false }, // Admin verification status
-      verificationDocuments: [
-        { type: String }, // Links to verification documents (e.g., business registration docs)
-      ],
+    admin: {
+      
     },
     lastLogin: { type: Date }, // Track the last login time
     createdAt: { type: Date, default: Date.now },
