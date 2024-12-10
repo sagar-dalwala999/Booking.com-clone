@@ -12,13 +12,15 @@ const staySchema = new mongoose.Schema(
       postalCode: { type: String, required: true },
     },
     location: {
-      latitude: { type: Number, required: true },
-      longitude: { type: Number, required: true },
+      type: { type: String, enum: ["Point"], default: "Point" },
+      coordinates: { type: [Number], required: true }, // [longitude, latitude]
     },
     images: [{ type: String, required: true }], // URLs of property images
     propertyType: { type: String, required: true }, // e.g., Hotel, Apartment, Villa
+    locationType: { type: String, required: true }, // e.g., City, Beach, Mountain
     pricePerNight: { type: Number, required: true },
-    currency: { type: String, default: "USD" },
+    maxGuests: { type: Number, required: true },
+    currency: { type: String, default: "INR" },
     numberOfRooms: { type: Number, required: true },
     amenities: [
       {
@@ -37,6 +39,13 @@ const staySchema = new mongoose.Schema(
         },
       ],
     },
+    pricing: [
+      {
+        startDate: { type: Date, required: true },
+        endDate: { type: Date, required: true },
+        pricePerNight: { type: Number, required: true },
+      },
+    ],
     availability: [
       {
         startDate: { type: Date, required: true },
@@ -60,6 +69,55 @@ const staySchema = new mongoose.Schema(
     },
     tags: [{ type: String }], // e.g., Luxury, Beachfront, Family-Friendly
     featured: { type: Boolean, default: false }, // Whether the stay is featured on the homepage
+    status: {
+      type: String,
+      enum: ["available", "unavailable"],
+      default: "available",
+    },
+    bookings: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        checkInDate: { type: Date, required: true },
+        checkOutDate: { type: Date, required: true },
+        guests: {
+          adults: { type: Number, required: true },
+          children: { type: Number, default: 0 },
+        },
+        totalPrice: { type: Number, required: true },
+        paymentStatus: {
+          type: String,
+          enum: ["pending", "completed", "failed"],
+          default: "pending",
+        },
+        paymentDetails: {
+          method: {
+            type: String,
+            enum: ["card", "bank transfer", "paypal"],
+            required: true,
+          },
+          transactionId: { type: String }, // Add transaction ID for completed payments
+          date: { type: Date },
+        },
+        status: {
+          type: String,
+          enum: ["booked", "cancelled", "completed"],
+          default: "booked",
+        },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
+    notifications: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Notification" },
+    ],
+
+    numberOfGuests: { type: Number, required: true },
+    paymentMethod: {
+      type: String,
+      enum: ["pay at property", "pay online", "cash"],
+      default: "pay at property",
+    },
+    isVerified: { type: Boolean, default: false },
+    views: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
   },
@@ -67,5 +125,8 @@ const staySchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Index for geospatial queries
+staySchema.index({ location: "2dsphere" });
 
 export const Stay = mongoose.model("Stay", staySchema);

@@ -102,6 +102,7 @@ function App() {
 
           {/* Admin Dashboard with nested routes */}
           <Route path="/admin" element={<AdminDashBoard />}>
+            <Route index element={<AdminStays />} />
             <Route path="/admin/stays" element={<AdminStays />} />
             <Route path="/admin/flights" element={<div>Admin Flights</div>} />
             <Route

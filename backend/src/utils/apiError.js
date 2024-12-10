@@ -1,23 +1,12 @@
-class apiError extends Error {
-  constructor(
+export const apiError = (res, status = 500, message = "Internal Server Error", errors = []) => {
+  const response = {
     status,
-    message = "Internal Server Error",
-    errors = [],
-    stack = ""
-  ) {
-    super(message);
-    this.status = status;
-    this.message = message;
-    this.data = null;
-    this.success = false;
-    this.errors = errors;
+    message,
+    success: false,
+    data: null,
+    errors,
+  };
 
-    if (stack) {
-      this.stack = stack;
-    } else {
-      Error.captureStackTrace(this, this.constructor);
-    }
-  }
-}
-
-export { apiError };
+  // Send the error response
+  res.status(status).json(response);
+};
