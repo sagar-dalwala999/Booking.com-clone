@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const NavBar = ({ userType }) => {
+
   const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
   const [notificationDropdownOpen, setNotificationDropdownOpen] =
     useState(false);
@@ -38,7 +39,7 @@ const NavBar = ({ userType }) => {
     profile: userType === "admin" ? "/admin/profile" : "/profile",
   };
 
-  const loggedIn = false; // Change to true/false based on your auth logic
+  const loggedIn = true; // Change to true/false based on your auth logic
 
   return (
     <div className="flex justify-between items-center bg-[#003b94] text-white p-4 w-full lg:justify-around">

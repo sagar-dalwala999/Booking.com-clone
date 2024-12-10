@@ -5,8 +5,10 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
   return (
     <Menu>
       <MenuHandler>
@@ -18,10 +20,20 @@ const UserProfile = () => {
         </Button>
       </MenuHandler>
       <MenuList className="bg-white text-black">
-        <MenuItem>My Account</MenuItem>
-        <MenuItem>Bookings and Trips</MenuItem>
-        <MenuItem>Reviews</MenuItem>
-        <MenuItem>Saved</MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/my-account");
+          }}
+        >
+          My Account
+        </MenuItem>
+        <MenuItem onClick={() => navigate("/my-account/trips-and-bookings")}>
+          Bookings and Trips
+        </MenuItem>
+        <MenuItem onClick={() => navigate("/my-account/reviews")}>
+          Reviews
+        </MenuItem>
+        <MenuItem onClick={() => navigate("/my-account/saved")}>Saved</MenuItem>
         <MenuItem>Sign Out</MenuItem>
       </MenuList>
     </Menu>

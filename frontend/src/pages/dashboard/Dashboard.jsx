@@ -10,6 +10,9 @@ const Dashboard = () => {
   const hideBookingNavigationRoutes = [
     "/stays-booking/:id",
     "/flights-booking/:id",
+    "/my-account",
+    "/my-account/*",
+
   ];
   const isBookingNavigationHidden = hideBookingNavigationRoutes.some((route) =>
     location.pathname.match(new RegExp(route.replace(":id", "\\d+")))
