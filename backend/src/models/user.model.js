@@ -16,7 +16,11 @@ const userSchema = new mongoose.Schema(
       postalCode: { type: String },
     },
     profilePicture: { type: String }, // URL of the profile picture
-    role: { type: String, enum: ["user", "host", "admin"], default: "user" }, // Role of the user
+    role: {
+      type: String,
+      enum: ["user", "superAdmin", "admin"],
+      default: "user",
+    }, // Role of the user
     preferences: {
       currency: { type: String, default: "INR" },
       language: { type: String, default: "en" }, // Preferred language
@@ -56,6 +60,16 @@ const userSchema = new mongoose.Schema(
     socialAccounts: {
       googleId: { type: String },
       facebookId: { type: String },
+    },
+    //! Admin-specific details
+    adminDetails: {
+      businessName: { type: String }, // Business name for admin
+      businessContact: { type: String }, // Admin business contact
+      businessAddress: { type: String }, // Admin business address
+      verificationStatus: { type: Boolean, default: false }, // Admin verification status
+      verificationDocuments: [
+        { type: String }, // Links to verification documents (e.g., business registration docs)
+      ],
     },
     lastLogin: { type: Date }, // Track the last login time
     createdAt: { type: Date, default: Date.now },
